@@ -17,6 +17,7 @@ const NavListItem = styled.li`
         align-items: center;
         padding: 10px 16px;
         transition: 450ms;
+        font-size: 14px;
         text-transform: uppercase;
         &:hover {
             background: #0B01F5;
@@ -40,6 +41,12 @@ const NavListItem = styled.li`
                 height: 10px;
                 width: 10px;
             }
+        }
+    }
+    @media screen and (max-width: 650px) {
+        a {
+            padding: 15px 21px;
+            font-size: 14px;
         }
     }
 `;

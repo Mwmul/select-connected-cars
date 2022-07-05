@@ -56,6 +56,14 @@ const SocialShareButtons = styled.div`
             background: #075AA7;
         }
     }
+    @media screen and (max-width: 650px) {
+        a, button {
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
+            min-height: 38px;
+        }
+    }
 `;
 
 

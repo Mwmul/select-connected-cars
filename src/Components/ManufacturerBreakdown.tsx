@@ -3,7 +3,17 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Manufacturer, ManufacturerData } from '../data/trackingData';
 
-const ManufacturerBreakdown = styled.div``;
+const ManufacturerBreakdown = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    .wrapper {
+        flex: 1;
+        overflow-y: auto;
+        max-height: 100%;
+    }
+`;
 
 const Title = styled.div`
     display: flex;
@@ -37,11 +47,13 @@ const Title = styled.div`
 `;
 
 const TrackedList = styled.div`
+    
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     /* grid-template-rows: repeat(4, 1fr); */
     grid-column-gap: 0px;
     grid-row-gap: 30px;
+    
     @media screen and (max-widtH: 1280px) {
         grid-template-columns: repeat(4, 1fr);
     }
@@ -94,22 +106,24 @@ export default (({manufacturer}) => {
                     <p className="value light">Data Value <span className="demi">£{manufacturer.total}</span></p>
                 </div>
             </Title>
-            <TrackedList>
-                {
-                    Object.keys(manufacturer.data).map((key: keyof ManufacturerData) => {
-                        if(!manufacturer.data[key])return;
-                        return (
-                            <Tracked key={manufacturer.manufacturer+'-'+key.toString()} colour={manufacturer.colour}>
-                                <img src={require(`../images/${key.toString()}.svg`)} />
-                                <div className="data">
-                                    <p className="label">{key}</p>
-                                    <p className="value demi">£{manufacturer.data[key]}</p>
-                                </div>
-                            </Tracked>
-                        )
-                    })
-                }
-            </TrackedList>
+            <div className="wrapper">
+                <TrackedList>
+                    {
+                        Object.keys(manufacturer.data).map((key: keyof ManufacturerData) => {
+                            if(!manufacturer.data[key])return;
+                            return (
+                                <Tracked key={manufacturer.manufacturer+'-'+key.toString()} colour={manufacturer.colour}>
+                                    <img src={require(`../images/${key.toString()}.svg`)} />
+                                    <div className="data">
+                                        <p className="label">{key}</p>
+                                        <p className="value demi">£{manufacturer.data[key]}</p>
+                                    </div>
+                                </Tracked>
+                            )
+                        })
+                    }
+                </TrackedList>
+            </div>
         </ManufacturerBreakdown>
     )
 }) as ManufacturerBreakdownComponent

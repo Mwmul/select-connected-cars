@@ -18,7 +18,7 @@ const Header = styled.div`
         /* align-items: flex-start; */
     }
 
-    @media screen and (max-width: 770px) {
+    @media screen and (max-width: 650px) {
         flex-direction: column;
         margin: 0 auto 25px auto;
     }
@@ -80,8 +80,25 @@ const Logo = styled.div`
     }
     @media screen and (max-width: 770px) {
         text-align: center;
+
+    }
+    @media screen and (max-width: 650px) {
         margin: 0 auto;
         margin-bottom: 10px;
+        p {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        h1 {
+            font-size: 55px;
+            margin-bottom: 10px;
+            svg {
+                height: 34px;
+                min-width: 34px;
+                width: 34px;
+
+            }
+        }
     }
 `;
 
