@@ -1,3 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56">
-  <circle id="Personal_Info_Icon" data-name="Personal Info Icon" cx="28" cy="28" r="28" fill="#0b3569"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56"><g transform="translate(-278 -416)"><circle cx="28" cy="28" r="28" transform="translate(278 416)" fill="transparent"/><path d="M32.515,6.987a.768.768,0,0,0-1.289-.353L26.465,11.4l-4.347-.724-.724-4.347,4.762-4.762A.77.77,0,0,0,25.793.272,9.177,9.177,0,0,0,14.866,12.127L1.2,25.793a4.1,4.1,0,0,0,5.8,5.8L20.65,17.935A9.191,9.191,0,0,0,32.515,6.987ZM4.1,30.227A1.537,1.537,0,1,1,5.636,28.69,1.537,1.537,0,0,1,4.1,30.227Z" transform="translate(290.606 426.605)" fill="#fff"/></g></svg>

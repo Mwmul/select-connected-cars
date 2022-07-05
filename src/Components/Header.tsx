@@ -10,6 +10,18 @@ const Header = styled.div`
     /* border: solid 1px salmon; */
     display: flex;
     align-items: center;
+    .row {
+        display: flex;
+        align-items: center;
+    }
+    @media screen and (max-width: 1100px) {
+        /* align-items: flex-start; */
+    }
+
+    @media screen and (max-width: 770px) {
+        flex-direction: column;
+        margin: 0 auto 25px auto;
+    }
 `;
 
 const Logo = styled.div`
@@ -19,7 +31,14 @@ const Logo = styled.div`
     h1 {
         text-transform: uppercase;
         font-size: 40px;
-        margin-left: 10px;
+        display: flex;
+        align-items: center;
+        svg {
+            margin-right: 10px;
+            width: 43px;
+            height: 43px;
+            min-width: 43px;
+        }
     }
     p {
         max-width: 170px;
@@ -27,6 +46,42 @@ const Logo = styled.div`
         font-size: 14px;
         line-height: 14px;
         margin-left: 10px;
+    }
+    @media screen and (max-width: 1135px) {
+        flex-direction: column;
+        p {
+            max-width: 100%;
+            margin-left: 0;
+        }
+        svg {
+            /* display: none; */
+        }
+        p {
+            /* display: none; */
+        }
+        h1 {
+            margin-bottom: 3px;
+            line-height: 37px;
+
+        }
+    }   
+    @media screen and (max-width: 960px) {
+        p {
+            font-size: 12px;
+        }
+        h1 {
+            font-size: 29px;
+            svg {
+                height: 28px;
+                min-width: 28px;
+                width: 28px;
+            }
+        }
+    }
+    @media screen and (max-width: 770px) {
+        text-align: center;
+        margin: 0 auto;
+        margin-bottom: 10px;
     }
 `;
 
@@ -46,12 +101,14 @@ export default (({}) => {
     return (
         <Header>
             <Logo>
-                {logoVectorMarkup}
-                <h1 className="heay">Connected Cars</h1>
+                
+                <h1 className="heay">{logoVectorMarkup} Connected Cars</h1>
                 <p>{headerCopy}</p>
             </Logo>
-            <Nav />
-            <SocialShareButtons />
+            <div className="row">
+                <Nav />
+                <SocialShareButtons />
+            </div>
         </Header>
     )
 }) as HeaderComponent;

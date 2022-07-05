@@ -17,13 +17,29 @@ const NavListItem = styled.li`
         align-items: center;
         padding: 10px 16px;
         transition: 450ms;
+        text-transform: uppercase;
         &:hover {
             background: #0B01F5;
+        }
+        &.active {
+            background: #0B01F5;
+
         }
         svg {
             height: 14px;
             width: 14px;
             margin-right: 10px;
+        }
+    }
+
+    @media screen and (max-width: 960px) {
+        a {
+            padding: 5px 11px;
+            font-size: 10px;
+            svg {
+                height: 10px;
+                width: 10px;
+            }
         }
     }
 `;
@@ -59,10 +75,10 @@ export default (({}) => {
         <Nav>
             <NavList>
                 <NavListItem>
-                    <a href="" role="button">{manufacturerVectorMarkup} Manufacturers</a>
+                    <a href="" role="button" className="active heavy">{manufacturerVectorMarkup} Manufacturers</a>
                 </NavListItem>
                 <NavListItem>
-                    <a href="" role="button">{dataVectorMarkup} Data</a>
+                    <a href="" role="button" className="heavy">{dataVectorMarkup} Data</a>
                 </NavListItem>
             </NavList>
         </Nav>

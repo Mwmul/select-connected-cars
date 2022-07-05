@@ -18,16 +18,17 @@ const GlobalStyle: any = createGlobalStyle`
 			width: 10px;
 		}
 
+
 		/* Track */
 		::-webkit-scrollbar-track {
-			background: #343640;
+			background: none;;
 			border-radius: 50px;
 
 		}
 
 		/* Handle */
 		::-webkit-scrollbar-thumb {
-			background: #494B51;
+			background: #707070;
 			border-radius: 50px;
 			&:active {
 				cursor: grabbing;

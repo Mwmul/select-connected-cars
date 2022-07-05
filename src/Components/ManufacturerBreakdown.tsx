@@ -42,14 +42,31 @@ const TrackedList = styled.div`
     /* grid-template-rows: repeat(4, 1fr); */
     grid-column-gap: 0px;
     grid-row-gap: 30px;
+    @media screen and (max-widtH: 1280px) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    @media screen and (max-widtH: 995px) {
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+    @media screen and (max-widtH: 670px) {
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+    @media screen and (max-widtH: 500px) {
+        grid-template-columns: repeat(1, 1fr);
+
+    }
 `;
-const Tracked = styled.div`
+const Tracked = styled.div<{colour: string}>`
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
     img {
         margin-right: 14px;
+        border-radius: 100%;
+        background-color: ${({colour}) => colour};
     }
     .label {
         font-size: 16px;
@@ -82,7 +99,7 @@ export default (({manufacturer}) => {
                     Object.keys(manufacturer.data).map((key: keyof ManufacturerData) => {
                         if(!manufacturer.data[key])return;
                         return (
-                            <Tracked key={manufacturer.manufacturer+'-'+key.toString()}>
+                            <Tracked key={manufacturer.manufacturer+'-'+key.toString()} colour={manufacturer.colour}>
                                 <img src={require(`../images/${key.toString()}.svg`)} />
                                 <div className="data">
                                     <p className="label">{key}</p>

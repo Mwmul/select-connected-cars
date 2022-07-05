@@ -8,7 +8,9 @@ const ManufacturerList = styled.div`
     overflow-y: auto;
     padding: 0px 15px 60px 0px;
     
-    
+    @media screen and (max-width: 770px) {
+        padding: 0px 5px 20px 0px;
+    }
 `;
 
 const Manufacturers = styled.div`
@@ -64,6 +66,40 @@ const Manufacturers = styled.div`
             }
         }
     }
+    @media screen and (max-width: 1122px) {
+        grid-template-columns: repeat(4, 1fr);
+
+    }
+    @media screen and (max-width: 910px) {
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+    @media screen and (max-width: 620px) {
+        .manufacturerContainer { 
+            .inner {
+                .logo {
+                    width: 90px;
+                    height: 90px;
+                    img {
+
+                    }
+                }
+                .name {
+                    font-size: 18px;
+                    margin-top: 11px;
+                }
+                .stat {
+                    font-size: 13px;
+                    line-height: 19px;
+                }
+
+            }
+        }
+    }
+    @media screen and (max-width: 530px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
 `;
 
 
@@ -103,10 +139,9 @@ export default (({manufacturers, onManufacturerSelect}) => {
                 {
                     manufacturers.map((manufacturer: Manufacturer, index: number) => {
                         return (
-                            <div className="manufacturerContainer" key={`manufacturer-${manufacturer.manufacturer}`}>
-                                <div className="inner" onClick={() => onClick(index)}>
+                            <div onClick={() => onClick(index)} className="manufacturerContainer" key={`manufacturer-${manufacturer.manufacturer}`}>
+                                <div className="inner" >
                                     <div className="logo" id={`logo-${index}`}>
-
                                         <img src={require(`../images/${manufacturer.manufacturer}.svg`)} alt="" />
                                     </div>
                                     <p className="name demi">{index + 1}. {manufacturer.manufacturer}</p>

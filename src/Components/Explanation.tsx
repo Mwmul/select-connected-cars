@@ -5,6 +5,9 @@ const Explanation = styled.div`
     width: 100%;
     max-width: 810px;
     margin: 0 auto 50px auto;
+    @media screen and (max-width: 770px) {
+        margin: 0 auto 30px auto;
+    }
 `;
 
 const Stats = styled.div`
@@ -17,7 +20,21 @@ const Stats = styled.div`
     p {
         font-size: 20px;
         text-align: center;
+        padding: 0px 5px;
      
+    }
+    @media screen and (max-width: 770px) {
+        padding: 13px 11px;
+        border-radius: 6px;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        p {
+            font-size: 14px;
+            &:nth-child(1) {
+                margin-bottom: 5px;
+                widtH: 100%;
+            }
+        }
     }
 `;
 
@@ -26,6 +43,11 @@ const Copy = styled.p`
     line-height: 22px;
     text-align: center;
     margin-bottom: 25px;
+    @media screen and (max-width: 770px)  {
+        font-size: 12px;
+        line-height: 14px;
+        margin-bottom: 18px;
+    }
 `;
 
 

@@ -25,6 +25,7 @@ const App = styled.div`
         width: calc(100% - 80px);
         max-width: 1640px;
         height: calc(100vh - 80px);
+        max-height: 1000px;
         margin: 0 auto;
         overflow: hidden;
         box-shadow: 0px 5px 21px 0px rgba(0,0,0,0.45);
@@ -32,7 +33,7 @@ const App = styled.div`
     .blackBackground {
         border-radius: 38px;
         background: black;
-        padding: 30px;
+        padding: 20px;
         height: 100%;
         overflow: hidden;
         display: flex;
@@ -42,7 +43,7 @@ const App = styled.div`
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding-bottom: 30px;
+            padding-bottom: 0px;
             
         }
         .shadow {
@@ -61,8 +62,41 @@ const App = styled.div`
                 left: 0;
                 pointer-events: none;
                 z-index: 999;
-                box-shadow: inset 0px -51px 65px 9px rgba(0,0,0,1);
+                /* box-shadow: inset 0px -51px 65px 9px rgba(0,0,0,1); */
             }
+        }
+    }
+
+
+    @media screen and (max-width: 770px) {
+        .outerBackground {
+            background: none;
+        }
+        .metal {
+            padding: 15px;
+            width: 100%;
+            max-width: 1640px;
+            height: 100vh;
+            max-height: 100vh;
+            padding: 0px;
+            background: none;
+            border-radius: 0px;
+        }
+        .blackBackground {
+            border-radius: 0px;
+            > .inner {
+                padding-bottom: 0px;
+            }
+            .shadow {
+                &:after {
+                    display: none;
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 420px) {
+        .blackBackground {
+            padding: 15px;
         }
     }
 
