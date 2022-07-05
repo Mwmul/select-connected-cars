@@ -1,0 +1,9 @@
+<svg id="VW_Logo" data-name="VW Logo" xmlns="http://www.w3.org/2000/svg" width="110" height="110" viewBox="0 0 110 110">
+  <circle id="Ellipse_1" data-name="Ellipse 1" cx="55" cy="55" r="55" fill="red"/>
+  <g id="MG" transform="translate(1233.238 1233.237)">
+    <g id="Group_31" data-name="Group 31" transform="translate(-1213.237 -1213.237)">
+      <path id="Path_11" data-name="Path 11" d="M87.188,36.769H56.642L36.756,56.655V86.962l19.727,19.807H86.87l19.886-19.886V56.5L87.188,36.769Zm13.523,47.409L84.165,100.724H59.347L42.8,84.258V59.36L59.347,42.894H84.483L100.71,59.2V84.178Z" transform="translate(-36.756 -36.769)" fill="#fff" fill-rule="evenodd"/>
+      <path id="Path_12" data-name="Path 12" d="M381.332,401.2l-4.216-8.591-6.284,5.887v21.08l6.046,6.125V405.177l5.25,11.693,5.966-15.591v32.693h6.682v-49.8H387.7Zm18.115-17.023v49.8h7.637l14.477-14.4v-10.5H410.425v6.046h4.136c1.114-.159,1.193,1.114.4,2.068s-8.829,8.83-8.829,8.83V392.132l9.386,9.784V404.3h6.046v-5.568l-14.318-14.557Z" transform="translate(-361.194 -374.155)" fill="#fff" fill-rule="evenodd"/>
+    </g>
+  </g>
+</svg>

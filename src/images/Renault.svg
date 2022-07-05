@@ -1,0 +1,11 @@
+<svg id="VW_Logo" data-name="VW Logo" xmlns="http://www.w3.org/2000/svg" width="110" height="110" viewBox="0 0 110 110">
+  <circle id="Ellipse_1" data-name="Ellipse 1" cx="55" cy="55" r="55" fill="#f0c41d"/>
+  <g id="Renault_-_New" data-name="Renault - New" transform="translate(91.62 104.153)">
+    <g id="Group_37" data-name="Group 37" transform="translate(-62.62 -83.547)">
+      <path id="Path_50" data-name="Path 50" d="M42.1,35H36.694L21.05,64.834,5.407,35,23.759,0H18.352L0,35,18.347,69.99l-.005.01h5.417l-.005-.01Z" fill="#fff"/>
+      <path id="Path_51" data-name="Path 51" d="M48.5.01,48.5,0H43.086l.005.01L24.744,35h5.407L45.794,5.165,61.438,35,43.086,70h5.407L66.845,35Z" transform="translate(-14.378)" fill="#fff"/>
+      <path id="Path_52" data-name="Path 52" d="M68.542,29.747l-2.7,5.157,9.112,17.381h5.408Z" transform="translate(-38.258 -17.285)" fill="#fff"/>
+      <path id="Path_53" data-name="Path 53" d="M30.149,83.547H24.741l11.818,22.538,2.7-5.157Z" transform="translate(-14.376 -48.547)" fill="#fff"/>
+    </g>
+  </g>
+</svg>
