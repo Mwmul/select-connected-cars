@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Explanation from '../Components/Explanation';
 import Header from '../Components/Header';
 import ManufacturerBreakdown from '../Components/ManufacturerBreakdown';
+import ManufacturerCarousel from '../Components/ManufacturerCarousel';
 import ManufacturerList from '../Components/ManufacturerList';
 import { Manufacturer, TrackingData } from '../data/trackingData';
 import { StateHook } from '../global.types';
@@ -20,8 +21,8 @@ const App = styled.div`
         background: url('${require('../images/metal.jpg')}');
         background-size: cover;
         background-position: center;
-        border-radius: 38px;
-        padding: 15px;
+        border-radius: 30px;
+        padding: 10px;
         width: calc(100% - 80px);
         max-width: 1640px;
         height: calc(100vh - 80px);
@@ -31,19 +32,20 @@ const App = styled.div`
         box-shadow: 0px 5px 21px 0px rgba(0,0,0,0.45);
     }
     .blackBackground {
-        border-radius: 38px;
+        border-radius: 30px;
         background: black;
         padding: 20px;
         height: 100%;
         overflow: hidden;
         display: flex;
         > .inner {
-            max-width: 1250px;
+            max-width: 100%;
+            padding: 30px 6.5%;
             margin: 0 auto;
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding-bottom: 0px;
+            background-image: linear-gradient(to top, #1a1a1a, #1a1a1a, #1a1a1a, rgba(0,0,0,0));
             
         }
         .shadow {
@@ -62,11 +64,16 @@ const App = styled.div`
                 left: 0;
                 pointer-events: none;
                 z-index: 999;
-                /* box-shadow: inset 0px -51px 65px 9px rgba(0,0,0,1); */
+                box-shadow: inset 0px -51px 65px 9px #1a1a1a;
             }
         }
     }
 
+    @media screen and (max-width: 1250px) {
+        .blackBackground > .inner {
+            padding: 20px 2.5%;
+        }
+    }
 
     @media screen and (max-width: 770px) {
         .outerBackground {
@@ -84,31 +91,42 @@ const App = styled.div`
         }
         .blackBackground {
             border-radius: 0px;
+            padding: 0px;
             > .inner {
+                padding: 20px 30px;
                 padding-bottom: 0px;
             }
             .shadow {
                 &:after {
-                    display: none;
+                    /* display: none; */
                 }
             }
         }
     }
     @media screen and (max-width: 420px) {
         .blackBackground {
-            padding: 15px;
+            padding: 0px;
+
         }
     }
 
+    @media screen and (max-width: 350px) {
+        .blackBackground > .inner {
+            padding: 20px 10px;
+        }
+    }
     
 `
 
 export default (
     ({trackingData}) => {
-        const [selectedManufacturer, setSelectedManufacturer]: StateHook<Manufacturer> = React.useState(null);
+        const [selectedManufacturerIndex, setSelectedManufacturer]: StateHook<number> = React.useState(null);
 
-        const onManufacturerSelect: OnManufacturerSelect = manufacturer => setSelectedManufacturer(manufacturer);
+        const onManufacturerSelect: OnManufacturerSelect = index => {
+            if(trackingData[index]) setSelectedManufacturer(index)
+        };
         
+        const selectedManufacturerData: Manufacturer = trackingData[selectedManufacturerIndex]
 
         return (
             <App>
@@ -119,7 +137,7 @@ export default (
 
                                 <Header />
                                 {
-                                    !selectedManufacturer
+                                    selectedManufacturerIndex === null
                                         ? (
                                             <>
                                                 <Explanation trackedTypes={22} totalValue={'1594.79'} />
@@ -128,8 +146,14 @@ export default (
                                                 </div>
                                             </>
                                         )
-                                        : <ManufacturerBreakdown manufacturer={selectedManufacturer} />
+                                        : (
+                                            <>
+                                                <ManufacturerBreakdown manufacturer={selectedManufacturerData} />
+                                                <ManufacturerCarousel onManufacturerSelect={onManufacturerSelect} manufacturers={trackingData} selectedManufacturerIndex={selectedManufacturerIndex} />
+                                            </>
+                                        )
                                 }
+                                
                             </div>
                         </div>
                     </div>
@@ -146,4 +170,4 @@ interface props {
 };
 type AppComponent = React.FC<props>;
 
-export type OnManufacturerSelect = (manufacturer: Manufacturer) => void;
+export type OnManufacturerSelect = (manufacturer: number) => void;

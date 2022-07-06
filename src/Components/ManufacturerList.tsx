@@ -6,10 +6,10 @@ import { Manufacturer, TrackingData } from '../data/trackingData';
 const ManufacturerList = styled.div`
     flex: 1;
     overflow-y: auto;
-    padding: 0px 15px 60px 0px;
+    padding: 0px 0px 60px 0px;
     
     @media screen and (max-width: 770px) {
-        padding: 0px 5px 20px 0px;
+        padding: 0px 0px 20px 0px;
     }
 `;
 
@@ -28,6 +28,9 @@ const Manufacturers = styled.div`
         transition: 400ms;
         cursor: pointer;
         overflow-y: auto;
+        &:nth-child(n+16) {
+            border-bottom: none;
+        }
         &:hover {
             background: rgba(255,255,255,0.1);
         }
@@ -54,6 +57,7 @@ const Manufacturers = styled.div`
                 font-size: 20px;
                 margin-bottom: 5px;
                 margin-top: 25px;
+                text-transform: uppercase;
             }
             .stat {
                 color: #B9B9B9;
@@ -68,10 +72,28 @@ const Manufacturers = styled.div`
     }
     @media screen and (max-width: 1122px) {
         grid-template-columns: repeat(4, 1fr);
+        .manufacturerContainer {
+            &:nth-child(16) {
+                border-bottom: solid 1px rgba(255,255,255,0.35);
+
+            }
+            &:nth-child(n+17) {
+                border-bottom: none;
+            }
+        }
 
     }
     @media screen and (max-width: 910px) {
         grid-template-columns: repeat(3, 1fr);
+        .manufacturerContainer {
+            &:nth-child(17), &:nth-child(18)  {
+                border-bottom: solid 1px rgba(255,255,255,0.35);
+
+            }
+            &:nth-child(n+19) {
+                border-bottom: none;
+            }
+        }
 
     }
     @media screen and (max-width: 620px) {
@@ -128,7 +150,7 @@ export default (({manufacturers, onManufacturerSelect}) => {
         // setTimeout(() => {
             // imageElement.style.transform = 'scale(20)';
             // setTimeout(() => {
-                onManufacturerSelect(manufacturers[index]);
+                onManufacturerSelect(index);
             // },1400);
         // }, 250);
     }

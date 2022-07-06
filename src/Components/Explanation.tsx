@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Explanation = styled.div`
     width: 100%;
     max-width: 810px;
-    margin: 0 auto 50px auto;
+    margin: 0 auto 35px auto;
     @media screen and (max-width: 770px) {
         margin: 0 auto 30px auto;
     }
@@ -35,6 +35,14 @@ const Stats = styled.div`
                 widtH: 100%;
             }
         }
+    }
+
+    @media screen and (max-width: 373px) {
+        padding: 10px 5px;
+        p {
+            font-size: 13px;
+        }
+
     }
 `;
 

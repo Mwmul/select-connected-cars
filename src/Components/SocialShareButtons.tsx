@@ -64,6 +64,21 @@ const SocialShareButtons = styled.div`
             min-height: 38px;
         }
     }
+    @media screen and (max-width: 575px) {
+        margin-left: auto;
+        a, button {
+            height: 22px;
+            width: 22px;
+            min-height: 22px;
+            min-width: 22px;
+        }
+        .twitter {
+            background: #00B2FF;
+        }
+        .facebook {
+            background: #075AA7;
+        }
+    }
 `;
 
 

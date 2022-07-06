@@ -49,6 +49,16 @@ const NavListItem = styled.li`
             font-size: 14px;
         }
     }
+    @media screen and (max-width: 575px) {
+        a {
+            padding: 5px 11px;
+            font-size: 10px;
+            svg {
+                height: 10px;
+                width: 10px;
+            }
+        }
+    }
 `;
 
 

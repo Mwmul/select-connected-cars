@@ -100,6 +100,15 @@ const Logo = styled.div`
             }
         }
     }
+    @media screen and (max-width: 575px) {
+        h1 {
+            font-size: 29px;
+            margin-bottom: 4px;
+        }
+        p {
+            font-size: 12px;
+        }
+    }
 `;
 
 
