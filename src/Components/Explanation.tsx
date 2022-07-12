@@ -8,6 +8,9 @@ const Explanation = styled.div`
     @media screen and (max-width: 770px) {
         margin: 0 auto 30px auto;
     }
+    @media screen and (max-width: 373px) {
+        margin-bottom: 15px;
+    }
 `;
 
 const Stats = styled.div`
@@ -55,6 +58,10 @@ const Copy = styled.p`
         font-size: 12px;
         line-height: 14px;
         margin-bottom: 18px;
+    }
+    @media screen and (max-width: 373px) {
+        font-size: 11px;
+        margin-bottom: 10px;
     }
 `;
 

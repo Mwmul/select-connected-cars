@@ -1,5 +1,7 @@
+import { parseUrl } from 'query-string';
 import * as React from 'react';
 import styled from 'styled-components';
+import DataTable from '../Components/DataTable';
 import Explanation from '../Components/Explanation';
 import Header from '../Components/Header';
 import ManufacturerBreakdown from '../Components/ManufacturerBreakdown';
@@ -7,12 +9,13 @@ import ManufacturerCarousel from '../Components/ManufacturerCarousel';
 import ManufacturerList from '../Components/ManufacturerList';
 import { Manufacturer, TrackingData } from '../data/trackingData';
 import { StateHook } from '../global.types';
+import useWindowSize from '../utils/useWindowSize';
 
-const App = styled.div`
+const App = styled.div<{windowHeight: number}>`
     .outerBackground {
         background: url('${require('../images/bodyBackground.jpg')}');
 		background-size: cover;
-		min-height: 100vh;
+		min-height: ${({windowHeight}) => windowHeight}px;
 		background-position: center;
         display: flex;
         align-items: center;
@@ -25,7 +28,7 @@ const App = styled.div`
         padding: 10px;
         width: calc(100% - 80px);
         max-width: 1640px;
-        height: calc(100vh - 80px);
+        height: calc(${({windowHeight}) => windowHeight}px - 80px);
         max-height: 1000px;
         margin: 0 auto;
         overflow: hidden;
@@ -41,11 +44,13 @@ const App = styled.div`
         > .inner {
             max-width: 100%;
             padding: 30px 6.5%;
+            padding-bottom: 10px;
             margin: 0 auto;
             flex: 1;
             display: flex;
             flex-direction: column;
-            background-image: linear-gradient(to top, #1a1a1a, #1a1a1a, #1a1a1a, rgba(0,0,0,0));
+            background-image: linear-gradient(to top, #151515, #151515, #151515, rgba(0,0,0,0));
+            border-radius: 30px;
             
         }
         .shadow {
@@ -54,17 +59,17 @@ const App = styled.div`
             flex: 1;
             overflow: hidden;
             &:after {
-                content: '';
+                /* content: ''; */
                 display: block;
                 position: absolute;
                 background: none;
-                bottom: 0px;
+                bottom: -5px;
                 height: 100%;
                 width: 100%;
                 left: 0;
                 pointer-events: none;
                 z-index: 999;
-                box-shadow: inset 0px -51px 65px 9px #1a1a1a;
+                box-shadow: inset 0px -51px 65px 9px #151515;
             }
         }
     }
@@ -72,6 +77,7 @@ const App = styled.div`
     @media screen and (max-width: 1250px) {
         .blackBackground > .inner {
             padding: 20px 2.5%;
+            padding-bottom: 10px;
         }
     }
 
@@ -83,8 +89,8 @@ const App = styled.div`
             padding: 15px;
             width: 100%;
             max-width: 1640px;
-            height: 100vh;
-            max-height: 100vh;
+            height: ${({windowHeight}) => windowHeight}px;
+            max-height: ${({windowHeight}) => windowHeight}px;
             padding: 0px;
             background: none;
             border-radius: 0px;
@@ -95,10 +101,15 @@ const App = styled.div`
             > .inner {
                 padding: 20px 30px;
                 padding-bottom: 0px;
+                /* background-image: linear-gradient(to top, #151515, #151515, #151515, #151515, rgba(0,0,0,0)); */
+                background: #1a1a1a;
+                border-radius: 0px;
             }
             .shadow {
                 &:after {
                     /* display: none; */
+                    box-shadow: inset 0px -5px 65px 9px #151515;
+
                 }
             }
         }
@@ -121,37 +132,89 @@ const App = styled.div`
 export default (
     ({trackingData}) => {
         const [selectedManufacturerIndex, setSelectedManufacturer]: StateHook<number> = React.useState(null);
+        const [showData, setShowData]: StateHook<boolean> = React.useState(false);
 
         const onManufacturerSelect: OnManufacturerSelect = index => {
-            if(trackingData[index]) setSelectedManufacturer(index)
+            if(!trackingData[index]) return;
+            if(trackingData[index]) setSelectedManufacturer(index);
+            window.location.hash = trackingData[index].manufacturer;
         };
         
         const selectedManufacturerData: Manufacturer = trackingData[selectedManufacturerIndex]
 
+        const {height} = useWindowSize();
+
+        React.useEffect(() => {
+            window.addEventListener('hashchange', (evt) => {
+                // console.log(window.location.hash, evt);
+                const parsedHash = decodeURI(window.location.hash).replace('#', '');
+
+                console.log(parsedHash)
+
+                if(parsedHash === 'data') {
+                    setShowData(true);
+                    return ;
+                }
+
+
+                setShowData(false)
+
+
+                if(!window.location.hash || parsedHash === 'home') {
+                    setSelectedManufacturer(null);
+
+                    return;
+                }
+
+
+                const selectedManufacturer = trackingData.findIndex(manufacturer => manufacturer.manufacturer === parsedHash);
+
+
+                if(trackingData[selectedManufacturer]) {
+                    if(selectedManufacturerIndex !== selectedManufacturer) {
+                        setSelectedManufacturer(selectedManufacturer);
+                    }
+                }
+                
+
+
+            }, false);
+        }, []);
+
+
+        const navHighlight: NavHighlight = showData ? 'data' : selectedManufacturerIndex >=1 ? 'none' : 'manufacturers'
+
         return (
-            <App>
+            <App windowHeight={height}>
                 <div className="outerBackground">
                     <div className="metal">
                         <div className="blackBackground">
                             <div className="inner">
 
-                                <Header />
+                                <Header navHighlight={navHighlight} />
                                 {
-                                    selectedManufacturerIndex === null
+                                    showData
                                         ? (
                                             <>
                                                 <Explanation trackedTypes={22} totalValue={'1594.79'} />
-                                                <div className="shadow">
-                                                    <ManufacturerList manufacturers={trackingData} onManufacturerSelect={onManufacturerSelect} />
-                                                </div>
+                                                <DataTable data={trackingData} />
                                             </>
                                         )
-                                        : (
-                                            <>
-                                                <ManufacturerBreakdown manufacturer={selectedManufacturerData} />
-                                                <ManufacturerCarousel onManufacturerSelect={onManufacturerSelect} manufacturers={trackingData} selectedManufacturerIndex={selectedManufacturerIndex} />
-                                            </>
-                                        )
+                                        :   selectedManufacturerIndex === null
+                                                ? (
+                                                    <>
+                                                        <Explanation trackedTypes={22} totalValue={'1594.79'} />
+                                                        <div className="shadow">
+                                                            <ManufacturerList manufacturers={trackingData} onManufacturerSelect={onManufacturerSelect} />
+                                                        </div>
+                                                    </>
+                                                )
+                                                : (
+                                                    <>
+                                                        <ManufacturerBreakdown manufacturer={selectedManufacturerData} />
+                                                        <ManufacturerCarousel onManufacturerSelect={onManufacturerSelect} manufacturers={trackingData} selectedManufacturerIndex={selectedManufacturerIndex} />
+                                                    </>
+                                                )
                                 }
                                 
                             </div>
@@ -171,3 +234,5 @@ interface props {
 type AppComponent = React.FC<props>;
 
 export type OnManufacturerSelect = (manufacturer: number) => void;
+
+export type NavHighlight = 'manufacturers' | 'data' | 'none'

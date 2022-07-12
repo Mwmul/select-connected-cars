@@ -6,7 +6,7 @@ import { Manufacturer, TrackingData } from '../data/trackingData';
 const ManufacturerList = styled.div`
     flex: 1;
     overflow-y: auto;
-    padding: 0px 0px 60px 0px;
+    padding: 0px 0px 00px 0px;
     
     @media screen and (max-width: 770px) {
         padding: 0px 0px 20px 0px;

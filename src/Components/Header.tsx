@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components'
+import { NavHighlight } from '../Containers/App';
 import Nav from './Nav';
 import SocialShareButtons from './SocialShareButtons';
 
@@ -21,6 +22,9 @@ const Header = styled.div`
     @media screen and (max-width: 650px) {
         flex-direction: column;
         margin: 0 auto 25px auto;
+    }
+    @media screen and (max-width: 373px) {
+        margin-bottom: 15px;
     }
 `;
 
@@ -109,6 +113,11 @@ const Logo = styled.div`
             font-size: 12px;
         }
     }
+    @media screen and (max-width: 373px) {
+        p {
+            margin-bottom: 0px;
+        }
+    }
 `;
 
 
@@ -123,7 +132,7 @@ const logoVectorMarkup: JSX.Element = (
 
 const headerCopy: string = `The car manufacturers that know the most about you`
 
-export default (({}) => {
+export default (({navHighlight}) => {
     return (
         <Header>
             <Logo>
@@ -132,12 +141,15 @@ export default (({}) => {
                 <p>{headerCopy}</p>
             </Logo>
             <div className="row">
-                <Nav />
+                <Nav navHighlight={navHighlight} />
                 <SocialShareButtons />
             </div>
         </Header>
     )
 }) as HeaderComponent;
 
-interface props {};
+interface props {
+
+    navHighlight: NavHighlight
+};
 type HeaderComponent = React.FC<props>;

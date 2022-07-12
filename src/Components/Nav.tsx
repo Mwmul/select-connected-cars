@@ -1,5 +1,7 @@
+import { BackdropProps } from '@material-ui/core';
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { NavHighlight } from '../Containers/App';
 
 const Nav = styled.nav``;
 
@@ -8,7 +10,7 @@ const NavList = styled.ul`
     align-items: center;
 `;
 
-const NavListItem = styled.li`
+const NavListItem = styled.li<{active: boolean}>`
     &:nth-child(1) {
         margin-right: 10px;
     }
@@ -22,10 +24,9 @@ const NavListItem = styled.li`
         &:hover {
             background: #0B01F5;
         }
-        &.active {
+        ${({active}) => active && css`
             background: #0B01F5;
-
-        }
+        `}
         svg {
             height: 14px;
             width: 14px;
@@ -87,20 +88,23 @@ const dataVectorMarkup: JSX.Element = (
     </svg>
 );
 
-export default (({}) => {
+export default (({navHighlight}) => {
     return (
         <Nav>
             <NavList>
-                <NavListItem>
-                    <a href="" role="button" className="active heavy">{manufacturerVectorMarkup} Manufacturers</a>
+                <NavListItem active={navHighlight === 'manufacturers'}>
+                    <a href="#home" role="button" className="heavy">{manufacturerVectorMarkup} Manufacturers</a>
                 </NavListItem>
-                <NavListItem>
-                    <a href="" role="button" className="heavy">{dataVectorMarkup} Data</a>
+                <NavListItem active ={navHighlight === 'data'}>
+                    <a href="#data" role="button" className="heavy">{dataVectorMarkup} Data</a>
                 </NavListItem>
             </NavList>
         </Nav>
     )
 }) as NavComponent
 
-interface props {}
+interface props {
+
+    navHighlight: NavHighlight
+}
 type NavComponent = React.FC<props>;
