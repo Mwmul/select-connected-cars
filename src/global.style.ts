@@ -16,10 +16,12 @@ const GlobalStyle: any = createGlobalStyle`
         }
 		::-webkit-scrollbar {
 			width: 10px;
+			height: 10px;
 		}
 		@media screen and (max-width: 770px) {
 			::-webkit-scrollbar {
 				width: 3px;
+				height: 3px;
 			}
 
 		}

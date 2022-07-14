@@ -88,9 +88,9 @@ export default (({}) => {
         initializeFacebookSharing();
     }, []);
 
-    const facebookMessage: string = ``;
+    const facebookMessage: string = `Select Car Leasing reveals which car manufacturers collect the most data on their customers and the data’s potential value by analysing their privacy and data policies.`;
 
-    const twitterMessage: string = encodeURI(``);
+    const twitterMessage: string = encodeURI(`Select Car Leasing reveals which car manufacturers collect the most data on their customers and the data’s potential value by analysing their privacy and data policies.`);
 
     const _shareOnFacebook: (e: React.MouseEvent) => void = (e) => {
         e.preventDefault();

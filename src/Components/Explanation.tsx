@@ -70,12 +70,12 @@ const copyText: string = `Select Car Leasing reveals which car manufacturers col
 
 export default (({trackedTypes = 22, totalValue = '1,500.54'}) => {
     return (
-        <Explanation>
+        <Explanation className="explanation">
             <Copy>{copyText}</Copy>
             <Stats>
                 <p className="demi">Potential Data Collected</p>
-                <p>Data Tracked: <span className="demi">{trackedTypes}</span> types</p>
-                <p>Data Value: <span className="demi">£{totalValue}</span></p>
+                <p>Data Tracked: <span className="demi">{trackedTypes}</span> Types</p>
+                <p>Data Value: <span className="demi">£{Number(totalValue).toLocaleString()}</span></p>
             </Stats>
         </Explanation>
     )

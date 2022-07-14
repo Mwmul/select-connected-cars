@@ -36,7 +36,7 @@ app.get('/', (req, res, next) => {
 });
 
 // Deployment
-const PORT = process.env.PORT || 3006;
+const PORT = process.env.PORT || 3001;
 
 const Server = app.listen(PORT, () => {
     console.log(`listening on port: ${PORT}`);

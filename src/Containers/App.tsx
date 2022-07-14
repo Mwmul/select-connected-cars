@@ -12,6 +12,13 @@ import { StateHook } from '../global.types';
 import useWindowSize from '../utils/useWindowSize';
 
 const App = styled.div<{windowHeight: number}>`
+    &.data-view {
+        @media screen and (max-width: 770px) {
+            .explanation {
+                display: none;
+            }
+        }
+    }
     .outerBackground {
         background: url('${require('../images/bodyBackground.jpg')}');
 		background-size: cover;
@@ -31,7 +38,7 @@ const App = styled.div<{windowHeight: number}>`
         height: calc(${({windowHeight}) => windowHeight}px - 80px);
         max-height: 1000px;
         margin: 0 auto;
-        overflow: hidden;
+        /* overflow: hidden; */
         box-shadow: 0px 5px 21px 0px rgba(0,0,0,0.45);
     }
     .blackBackground {
@@ -39,7 +46,7 @@ const App = styled.div<{windowHeight: number}>`
         background: black;
         padding: 20px;
         height: 100%;
-        overflow: hidden;
+        /* overflow: hidden; */
         display: flex;
         > .inner {
             max-width: 100%;
@@ -51,15 +58,16 @@ const App = styled.div<{windowHeight: number}>`
             flex-direction: column;
             background-image: linear-gradient(to top, #151515, #151515, #151515, rgba(0,0,0,0));
             border-radius: 30px;
+            /* overflow: hidden; */
             
         }
-        .shadow {
+        /* .shadow {
             position: relative;
             display: flex;
             flex: 1;
             overflow: hidden;
             &:after {
-                /* content: ''; */
+                content: '';
                 display: block;
                 position: absolute;
                 background: none;
@@ -71,7 +79,7 @@ const App = styled.div<{windowHeight: number}>`
                 z-index: 999;
                 box-shadow: inset 0px -51px 65px 9px #151515;
             }
-        }
+        } */
     }
 
     @media screen and (max-width: 1250px) {
@@ -129,6 +137,11 @@ const App = styled.div<{windowHeight: number}>`
     
 `
 
+// const TableKey = styled.div`
+//     display: flex;
+//     padding-left: 200px;
+// `;
+
 export default (
     ({trackingData}) => {
         const [selectedManufacturerIndex, setSelectedManufacturer]: StateHook<number> = React.useState(null);
@@ -137,6 +150,7 @@ export default (
         const onManufacturerSelect: OnManufacturerSelect = index => {
             if(!trackingData[index]) return;
             if(trackingData[index]) setSelectedManufacturer(index);
+            if(showData) setShowData(false);
             window.location.hash = trackingData[index].manufacturer;
         };
         
@@ -179,13 +193,14 @@ export default (
 
 
             }, false);
+            window.location.hash = '';
         }, []);
 
 
         const navHighlight: NavHighlight = showData ? 'data' : selectedManufacturerIndex >=1 ? 'none' : 'manufacturers'
 
         return (
-            <App windowHeight={height}>
+            <App windowHeight={height} className={showData ? 'data-view' : ''}>
                 <div className="outerBackground">
                     <div className="metal">
                         <div className="blackBackground">
@@ -196,17 +211,26 @@ export default (
                                     showData
                                         ? (
                                             <>
-                                                <Explanation trackedTypes={22} totalValue={'1594.79'} />
-                                                <DataTable data={trackingData} />
+                                                
+                                                {/* <TableKey>
+                                                    {
+                                                        trackingData.map(manufacturer => (
+                                                            <div>
+                                                                <img src={require(`../images/${manufacturer.manufacturer}.svg`)} alt="" />
+                                                            </div>
+                                                        ))
+                                                    }
+                                                </TableKey> */}
+                                                <DataTable data={trackingData} onManufacturerSelect={onManufacturerSelect} />
                                             </>
                                         )
                                         :   selectedManufacturerIndex === null
                                                 ? (
                                                     <>
                                                         <Explanation trackedTypes={22} totalValue={'1594.79'} />
-                                                        <div className="shadow">
+                                                        {/* <div className="shadow"> */}
                                                             <ManufacturerList manufacturers={trackingData} onManufacturerSelect={onManufacturerSelect} />
-                                                        </div>
+                                                        {/* </div> */}
                                                     </>
                                                 )
                                                 : (

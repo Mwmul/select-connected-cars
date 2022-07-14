@@ -674,4 +674,32 @@ export default ([
         "company info": 72.49
       }
     }
-   ]) as TrackingData
+   ]) as TrackingData;
+
+
+export const tooltipCopy: {
+    [key: string]: string
+} = {
+    "personal details": 'Name, gender, etc.',
+    "contact info": 'Email, phone, address, etc.',
+    "finance info": 'Payment method, credit card details, finance application, etc.',
+    "infotainment system data": 'Contacts, payment details, settings, etc.',
+    "Mobile app information": 'Mobile app information.',
+    "Social media": 'Social media.',
+    "online activity": 'IP, device type, cookies, browser type, etc.',
+    "order information": 'Purchase details, ID, trade-in info, etc.',
+    "customer activity": 'Correspondence, services used, etc.',
+    "vehicle details": 'Make, model, VIN, etc.',
+    "vehicle data": 'Telemetry, operation, vehicle health, etc.',
+    "charging info": 'Charging stations used, performance, etc.',
+    "Autopilot data": 'Autopilot data.',
+    "Service & repair history": 'Service and repair history.',
+    "accidents & collisions": 'Airbags deployed, emergency braking.',
+    "Location": 'Location.',
+    "Photos & videos": 'Photos & Videos.',
+    "Voice recordings": 'Voice recordings.',
+    "Interests": 'Interests.',
+    "Insurance details": 'Insurance details.',
+    "driving history": 'Insurance claims, accidents, convictions.',
+    "company info": 'Business, business details, job titles, etc.'
+}

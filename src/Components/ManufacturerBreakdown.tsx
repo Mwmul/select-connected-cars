@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import styled from 'styled-components';
-import { Manufacturer, ManufacturerData } from '../data/trackingData';
+import { Manufacturer, ManufacturerData, tooltipCopy } from '../data/trackingData';
 import ReactTooltip from 'react-tooltip';
 import { tooltip } from 'leaflet';
 
@@ -71,20 +71,20 @@ const TrackedList = styled.div`
     grid-template-columns: repeat(5, 1fr);
     /* grid-template-rows: repeat(4, 1fr); */
     grid-column-gap: 0px;
-    grid-row-gap: 70px;
+    grid-row-gap: 30px;
     
-    @media screen and (max-widtH: 1280px) {
+    @media screen and (max-widtH: 1400px) {
         grid-template-columns: repeat(4, 1fr);
     }
-    @media screen and (max-widtH: 995px) {
+    @media screen and (max-widtH: 1100px) {
         grid-template-columns: repeat(3, 1fr);
 
     }
-    @media screen and (max-widtH: 670px) {
+    @media screen and (max-widtH: 850px) {
         grid-template-columns: repeat(2, 1fr);
 
     }
-    @media screen and (max-widtH: 500px) {
+    @media screen and (max-widtH: 550px) {
         grid-template-columns: repeat(1, 1fr);
         grid-row-gap: 20px;
     }
@@ -92,7 +92,8 @@ const TrackedList = styled.div`
 const Tracked = styled.div<{colour: string}>`
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
+    padding: 0px 5px;
     margin: 0;
     img {
         margin-right: 14px;
@@ -101,10 +102,15 @@ const Tracked = styled.div<{colour: string}>`
     }
     .label {
         font-size: 16px;
-        color: #B9B9B9;
+        color: white;
         line-height: 22px;
         margin-bottom: 3px;
         text-transform: capitalize;
+    }
+    .description {
+        font-size: 13px;
+        color: #B9B9B9;
+        line-height: 22px;
     }
     .data {
         width: 140px;
@@ -116,11 +122,13 @@ const Tracked = styled.div<{colour: string}>`
         
         position: relative;
     }
-    @media screen and (max-widtH: 500px) {
+    @media screen and (max-widtH: 550px) {
+        padding: 0;
         .data {
             width: auto;
         }
     }
+
 `;
 
 
@@ -145,7 +153,7 @@ export default (({manufacturer}) => {
                 </div>
                 <div>
                     <h3>{manufacturer.manufacturer}</h3>
-                    <p className="value light">Data Value <span className="demi">£{manufacturer.total}</span></p>
+                    <p className="value light">Data Value Per Driver: <span className="demi">£{manufacturer.total}</span></p>
                 </div>
             </Title>
             <div className="wrapper">
@@ -157,7 +165,7 @@ export default (({manufacturer}) => {
                                 <Tracked key={manufacturer.manufacturer+'-'+key.toString()} colour={manufacturer.colour}>
                                     <div className="image">
                                         <img src={require(`../images/${key.toString()}.svg`)} />
-                                        <TooltipAnchor data-tip={tooltipCopy[key]} data-for='data-type-tooltip' data-place="right" data-effect="solid">
+                                        {/* <TooltipAnchor data-tip={tooltipCopy[key]} data-for='data-type-tooltip' data-place="right" data-effect="solid">
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="18" height="18" viewBox="0 0 18 18">
                                                 <defs>
                                                     <clipPath id="clip-path">
@@ -174,12 +182,15 @@ export default (({manufacturer}) => {
                                                     </g>
                                                 </g>
                                             </svg>
-                                        </TooltipAnchor>
+                                        </TooltipAnchor> */}
                                     </div>
                                     <div className="data">
                                         <p className="label">{key}</p>
-                                        <p className="value demi">£{manufacturer.data[key]}</p>
-                                        
+                                        {
+                                            tooltipCopy[key].toLowerCase().replace('.','') !== key.toLocaleLowerCase() && (
+                                                <div className="description">{tooltipCopy[key]}</div>                                        
+                                            )
+                                        }
                                     </div>
                                     
                                 </Tracked>
@@ -200,29 +211,3 @@ interface props {
 type ManufacturerBreakdownComponent = React.FC<props>;
 
 
-const tooltipCopy: {
-    [key: string]: string
-} = {
-    "personal details": 'Personal details - name, gender, etc.',
-    "contact info": 'Contact info - email, phone, address, etc.',
-    "finance info": 'Finance info - payment method, credit card details, finance application, etc.',
-    "infotainment system data": 'Infotainment system data - contacts, payment details (Apple & Android) settings, etc.',
-    "Mobile app information": 'Mobile app information',
-    "Social media": 'Social media',
-    "online activity": 'Online activity - IP, device type, cookies, browser tye, etc.',
-    "order information": 'Order information - purchase details, ID, trade-in info, etc.',
-    "customer activity": 'Customer activity - correspondence, services used, etc.',
-    "vehicle details": 'Car details - make, model, VIN, etc.',
-    "vehicle data": 'Vehicle data - telemetry, operation, vehicle health, etc.',
-    "charging info": 'Charging info - charging stations used, performance, etc.',
-    "Autopilot data": 'Autopilot data',
-    "Service & repair history": 'Service and repair history',
-    "accidents & collisions": 'Accidents/collisions - airbags deployed, emergency braking',
-    "Location": 'Location',
-    "Photos & videos": 'Photos & Videos',
-    "Voice recordings": 'Voice recordings',
-    "Interests": 'Interests',
-    "Insurance details": 'Insurance details',
-    "driving history": 'Driving history - insurance claims, acciddents, convistions',
-    "company info": 'Comapny info - business, business details, job titles, etc.'
-}
