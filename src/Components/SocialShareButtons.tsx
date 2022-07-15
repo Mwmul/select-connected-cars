@@ -135,7 +135,7 @@ function shareOnFacebook(message: string, URL: string): void {
 function initializeFacebookSharing(): void {
     (window as any).fbAsyncInit = (): void => {
         (window as any).FB.init({
-        appId            : '',
+        appId            : '1128508764397482',
         autoLogAppEvents : true,
         xfbml            : true,
         version          : 'v3.2'

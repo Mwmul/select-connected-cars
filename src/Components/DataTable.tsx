@@ -26,7 +26,8 @@ const DataTable = styled.div`
         display: flex;
         position: sticky;
         top: 0;
-        height: 50px;
+        padding-top: 5px;
+        height: 55px;
         grid-area: top;
         background: #151515;
         @media screen and (max-width: 770px) {
@@ -39,13 +40,28 @@ const DataTable = styled.div`
             min-width: 50px;
             min-height: 50px;
             text-align: center;
-            .tooltip {
-
-            }
+            cursor: pointer;
             img {
                 width: 40px;
                 height: 40px;
+                box-shadow: 0px 0px 0px 0px rgba(255,255,255,1);
+                transition: 450ms;
+                cursor: pointer;
+                transform-origin: center;
+                border-radius: 100%;
+                
             }
+            &:hover {
+                img {
+
+                    box-shadow: 0px 0px 0px 2px rgba(255,255,255,1);
+                }
+
+                }
+            .tooltip {
+
+            }
+            
         }
     }
     .blank {
@@ -144,8 +160,12 @@ const TableCol = styled.div`
         min-height: 50px;
         display: block;
         position: sticky;
+        border-radius: 100%;
+        overflow: hidden;
         top: 0;
         left: 0;
+            cursor: pointer;
+
         img {
             width: 100%;
             height: 100%;
